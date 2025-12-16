@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { BarChart3, PlusCircle, List, Wallet, LayoutGrid } from "lucide-react";
+import { BarChart3, PlusCircle, List, Wallet, LayoutGrid, Mail } from "lucide-react";
 import CreatePollForm from "./components/CreatePollForm";
 import MyPolls from "./components/MyPolls";
 import AllPolls from "./components/AllPolls";
@@ -11,8 +11,16 @@ import Logo from "./components/Logo";
 import TradingBackground from "./components/TradingBackground";
 import ThemeToggle from "./components/ThemeToggle";
 import MarketPage from "./components/MarketPage";
+import Contact from "./components/Contact";
 
-type Tab = "create" | "myPolls" | "allPolls" | "stats" | "market" | "portfolio";
+type Tab =
+  | "create"
+  | "myPolls"
+  | "allPolls"
+  | "stats"
+  | "market"
+  | "portfolio"
+  | "contact";
 
 interface MarketTabState {
   marketAddress: `0x${string}`;
@@ -49,7 +57,7 @@ const parseMarketFromHash = (): { tab: Tab; market: MarketTabState | null } => {
   }
 
   // Check for simple tab names
-  if (["create", "myPolls", "allPolls", "stats"].includes(hash)) {
+  if (["create", "myPolls", "allPolls", "stats", "portfolio", "contact"].includes(hash)) {
     return { tab: hash as Tab, market: null };
   }
 
@@ -235,6 +243,17 @@ function App() {
             <BarChart3 className="w-5 h-5 sm:w-5 sm:h-5" />
             <span className="hidden sm:inline">Statistics</span>
           </button>
+          <button
+            onClick={() => setActiveTab("contact")}
+            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm md:text-base transition-all ${
+              activeTab === "contact"
+                ? "bg-slate-200/90 dark:bg-[rgba(24,36,63,0.85)] text-slate-700 dark:text-white shadow-[0_2px_4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] border border-slate-300 dark:border-white/[0.08]"
+                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
+            }`}
+          >
+            <Mail className="w-5 h-5 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">Contact</span>
+          </button>
         </div>
       </nav>
 
@@ -243,7 +262,8 @@ function App() {
         {!isConnected &&
         activeTab !== "allPolls" &&
         activeTab !== "stats" &&
-        activeTab !== "portfolio" ? (
+        activeTab !== "portfolio" &&
+        activeTab !== "contact" ? (
           <div className="card text-center">
             <p className="text-gray-600 dark:text-gray-400 text-lg">
               Please connect your wallet to continue
@@ -266,6 +286,7 @@ function App() {
                 }
               />
             )}
+            {activeTab === "contact" && <Contact />}
             {activeTab === "market" && marketTabState && (
               <MarketPage
                 marketAddress={marketTabState.marketAddress}
