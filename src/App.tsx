@@ -168,13 +168,21 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <Logo />
-              <div>
-                <h1 className="sb-heading text-2xl font-bold">
-                  Prediction Oracle
-                </h1>
-                <p className="text-xs text-sky-900/90 dark:text-sky-100/80 font-medium tracking-wide">
-                  Bikini Bottom of On-chain Predictions
-                </p>
+              <div className="relative flex items-center space-x-2">
+                <div>
+                  <h1 className="sb-heading text-2xl font-bold">
+                    Prediction Oracle
+                  </h1>
+                  <p className="text-xs text-sky-900/90 dark:text-sky-100/80 font-medium tracking-wide">
+                    Bikini Bottom of On-chain Predictions
+                  </p>
+                </div>
+                {/* SpongeBob decorative image near header text */}
+                <img
+                  src="https://gateway.pinata.cloud/ipfs/bafybeighn2rblnpwea5qmo7xi6s3xao6lx4hglyesfeyo3bikkt3bu54yq"
+                  alt="Cheerful yellow sponge character"
+                  className="hidden sm:block h-10 md:h-12 lg:h-14 w-auto -mt-3 drop-shadow-lg"
+                />
               </div>
             </div>
             <div className="flex items-center space-x-3">

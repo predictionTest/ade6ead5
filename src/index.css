@@ -50,7 +50,6 @@ body {
 #root {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 * {
@@ -346,4 +345,52 @@ html:not(.dark) .text-gray-300 {
   button:active {
     transform: translateY(1px) scale(0.98);
   }
+}
+
+/* SpongeBob character watermarks for poll cards */
+.poll-watermark-patrick,
+.poll-watermark-sandy,
+.poll-watermark-squidward {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.poll-watermark-patrick > *,
+.poll-watermark-sandy > *,
+.poll-watermark-squidward > * {
+  position: relative;
+  z-index: 1;
+}
+
+.poll-watermark-patrick::after,
+.poll-watermark-sandy::after,
+.poll-watermark-squidward::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: 120px auto;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Patrick watermark - bottom-right */
+.poll-watermark-patrick::after {
+  background-image: url("https://gateway.pinata.cloud/ipfs/bafkreigtd25emqvbo6yogl36sfzlfqgju5vfdpsydruyqp2mge5akeq3va");
+  background-position: right -10px bottom -10px;
+}
+
+/* Sandy watermark - top-left */
+.poll-watermark-sandy::after {
+  background-image: url("https://gateway.pinata.cloud/ipfs/bafkreid7fvrvdl5kol7uhuv4dk5s7jtpg3alvzbljjvhusxiumaoaegrc4");
+  background-position: left -10px top -10px;
+}
+
+/* Squidward watermark - centered */
+.poll-watermark-squidward::after {
+  background-image: url("https://gateway.pinata.cloud/ipfs/bafkreihqtyzuvdlh2n2zqgwp3o36is5nbmlqi5bdqotwjdwdpp4ldacdfa");
+  background-position: center;
+  background-size: 140px auto;
 }

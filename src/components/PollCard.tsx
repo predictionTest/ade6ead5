@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   ExternalLink,
   Calendar,
@@ -67,6 +67,19 @@ const PollCard = ({
   const [previousStatus, setPreviousStatus] = useState<PollStatus>(poll.status);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showBackSide, setShowBackSide] = useState(false);
+
+  // Deterministic watermark selection based on poll address
+  const watermarkClass = useMemo(() => {
+    const addr = poll.pollAddress.toLowerCase();
+    let hash = 0;
+    for (let i = 0; i < addr.length; i++) {
+      hash = (hash * 31 + addr.charCodeAt(i)) >>> 0;
+    }
+    const mod = hash % 3;
+    if (mod === 0) return "poll-watermark-patrick";
+    if (mod === 1) return "poll-watermark-sandy";
+    return "poll-watermark-squidward";
+  }, [poll.pollAddress]);
 
   // Get market data for this poll
   const pollMarkets = marketsMap.get(poll.pollAddress.toLowerCase());
@@ -276,7 +289,7 @@ const PollCard = ({
         </div>
 
         <div
-          className={`card transition-all duration-200 group p-3 flex flex-col ${
+          className={`card ${watermarkClass} transition-all duration-200 group p-3 flex flex-col ${
             showBackSide && isExpandable
               ? "absolute inset-x-0 top-0 z-20 min-h-full h-auto max-h-[90vh] overflow-y-auto scale-105 shadow-xl border-primary-500 bg-white dark:bg-slate-800"
               : "relative h-full hover:border-primary-500 hover:shadow-md hover:shadow-primary-500/5"
@@ -402,7 +415,7 @@ const PollCard = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-mono flex items-center gap-1"
+                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-mono text-xs flex items-center gap-1"
                 >
                   <span>{shortenAddress(poll.pollAddress)}</span>
                   <ExternalLink className="w-3 h-3" />
@@ -431,7 +444,7 @@ const PollCard = ({
 
   return (
     <div
-      className={`card hover:border-primary-500 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-500/20 group relative overflow-hidden flex flex-col ${
+      className={`card ${watermarkClass} hover:border-primary-500 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-500/20 group relative overflow-hidden flex flex-col ${
         isResolved ? "cursor-pointer" : ""
       }`}
       onClick={handleCardClick}
