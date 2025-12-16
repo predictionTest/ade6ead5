@@ -9,8 +9,8 @@
   font-weight: 400;
 
   color-scheme: light;
-  color: #1e293b; /* Slate 800 */
-  background-color: #f8fafc; /* Slate 50 */
+  color: #013a63; /* Deep ocean text */
+  background-color: #e0f7fa; /* Light ocean */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,35 +30,21 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   max-width: 100%;
-  @apply bg-slate-50 dark:bg-[#0f172a]; /* Slate 900 - Lighter, richer background */
-  background-image: radial-gradient(
-      at 0% 0%,
-      rgba(14, 165, 233, 0.1) 0px,
-      transparent 50%
-    ),
-    radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%);
+  /* Underwater gradient background with subtle depth */
+  background: radial-gradient(circle at 0% 0%, #b3e5fc 0, transparent 55%),
+    radial-gradient(circle at 100% 0%, #81d4fa 0, transparent 55%),
+    radial-gradient(circle at 0% 100%, #4dd0e1 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, #29b6f6 0, transparent 55%),
+    linear-gradient(to bottom, #e0f7fa 0%, #4fc3f7 45%, #01579b 100%);
   background-attachment: fixed;
 }
 
-/* Dark mode background override - Richer, more subtle */
+/* Dark mode background override - richer, deep ocean */
 .dark body {
-  background-image: radial-gradient(
-      circle at 15% 0%,
-      rgba(56, 189, 248, 0.1) 0px,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 85% 0%,
-      rgba(139, 92, 246, 0.1) 0px,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(14, 165, 233, 0.05) 0px,
-      transparent 50%
-    );
+  background: radial-gradient(circle at 15% 0%, #4dd0e1 0, transparent 55%),
+    radial-gradient(circle at 85% 0%, #26c6da 0, transparent 55%),
+    radial-gradient(circle at 50% 50%, #01579b 0, transparent 55%),
+    linear-gradient(to bottom, #001f3f 0%, #003f7f 40%, #001225 100%);
 }
 
 #root {
@@ -98,137 +84,163 @@ h6 {
   overflow-wrap: break-word;
 }
 
+/* SpongeBob-style headings */
+h1,
+h2,
+.sb-heading {
+  font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffeb3b;
+  text-shadow: 2px 2px 0 rgba(1, 87, 155, 0.9),
+    4px 4px 0 rgba(1, 57, 94, 0.7);
+  animation: heading-wave 6s ease-in-out infinite;
+}
+
+h3,
+h4 {
+  font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  h1,
+  h2,
+  .sb-heading {
+    animation: none !important;
+  }
+}
+
 @layer components {
   .btn-primary {
-    @apply text-slate-700 font-semibold py-2.5 px-5 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0;
-    background: rgba(226, 232, 240, 0.9);
-    border: 1px solid rgba(148, 163, 184, 0.3);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    @apply text-slate-800 font-semibold py-2.5 px-5 rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 30% 0%, #fffde7 0, #fff59d 40%, #ffeb3b 100%);
+    border: 2px solid rgba(3, 169, 244, 0.6);
+    box-shadow: 0 4px 0 rgba(245, 127, 23, 0.8),
+      0 8px 18px rgba(3, 169, 244, 0.35);
   }
 
   .btn-primary:hover {
-    background: rgba(203, 213, 225, 0.95);
-    border-color: rgba(148, 163, 184, 0.5);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    background: radial-gradient(circle at 30% 0%, #fffde7 0, #fff176 40%, #ffeb3b 100%);
+    border-color: rgba(3, 155, 229, 0.8);
+    box-shadow: 0 6px 0 rgba(245, 127, 23, 0.9),
+      0 14px 24px rgba(3, 155, 229, 0.4);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.9) 0,
+        transparent 45%);
+    opacity: 0.4;
+    pointer-events: none;
   }
 
   .dark .btn-primary {
-    @apply text-white;
-    background: rgba(24, 36, 63, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    @apply text-slate-900;
+    background: radial-gradient(circle at 30% 0%, #fffde7 0, #fff59d 40%, #ffeb3b 100%);
+    border-color: rgba(2, 136, 209, 0.9);
+    box-shadow: 0 4px 0 rgba(245, 127, 23, 0.9),
+      0 16px 30px rgba(0, 131, 143, 0.8);
   }
 
   .dark .btn-primary:hover {
-    background: rgba(20, 30, 50, 0.9);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    background: radial-gradient(circle at 30% 0%, #fffde7 0, #fff176 40%, #ffeb3b 100%);
+    box-shadow: 0 6px 0 rgba(245, 127, 23, 1),
+      0 22px 36px rgba(0, 96, 100, 0.9);
   }
 
   .btn-secondary {
-    @apply text-slate-700 dark:text-slate-200 font-medium py-2.5 px-5 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(148, 163, 184, 0.3);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-
-  .dark .btn-secondary {
-    background: linear-gradient(
-      135deg,
-      rgba(30, 41, 59, 0.8) 0%,
-      rgba(51, 65, 85, 0.6) 100%
-    );
-    border: 1px solid rgba(148, 163, 184, 0.15);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    @apply text-slate-50 dark:text-slate-50 font-medium py-2.5 px-5 rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #03a9f4, #0288d1);
+    border: 2px solid rgba(255, 235, 59, 0.9);
+    box-shadow: 0 3px 0 rgba(1, 87, 155, 0.9),
+      0 10px 20px rgba(0, 150, 199, 0.6);
   }
 
   .btn-secondary:hover {
-    background: rgba(248, 250, 252, 1);
-    border-color: rgba(148, 163, 184, 0.5);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #29b6f6, #039be5);
+    box-shadow: 0 4px 0 rgba(1, 87, 155, 1),
+      0 16px 30px rgba(0, 121, 107, 0.85);
+    transform: translateY(-1px) scale(1.02);
   }
 
-  .dark .btn-secondary:hover {
-    background: linear-gradient(
-      135deg,
-      rgba(51, 65, 85, 0.9) 0%,
-      rgba(71, 85, 105, 0.7) 100%
-    );
-    border-color: rgba(148, 163, 184, 0.25);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  .btn-secondary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 15% 0%, rgba(255, 255, 255, 0.4) 0,
+        transparent 40%);
+    opacity: 0.35;
+    pointer-events: none;
   }
 
   .card {
     @apply rounded-2xl p-6 border transition-all duration-300;
-    /* Light theme - visible cards with subtle depth */
-    background: rgba(
-      248,
-      250,
-      252,
-      0.95
-    ); /* Slate-50 tint - softer than pure white */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-color: rgba(
-      148,
-      163,
-      184,
-      0.3
-    ); /* Slate-400 with opacity - visible border */
-    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08),
-      0 2px 6px -2px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(148, 163, 184, 0.1);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(224, 247, 250, 0.96));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: rgba(3, 155, 229, 0.2);
+    box-shadow: 0 10px 20px rgba(3, 169, 244, 0.18),
+      0 0 0 2px rgba(255, 255, 255, 0.7);
   }
 
   .card:hover {
-    border-color: rgba(14, 165, 233, 0.4); /* Primary color hint on hover */
-    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12),
-      0 4px 8px -2px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(14, 165, 233, 0.15);
+    border-color: rgba(3, 155, 229, 0.7);
+    box-shadow: 0 16px 30px rgba(3, 155, 229, 0.3),
+      0 0 0 2px rgba(255, 235, 59, 0.7);
+    transform: translateY(-2px);
   }
 
   .input {
-    @apply w-full px-4 py-3 bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all duration-200 backdrop-blur-sm;
+    @apply w-full px-4 py-3 bg-white/70 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-400/70 focus:border-primary-500 transition-all duration-200 backdrop-blur-sm;
   }
 
   .label {
-    @apply block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 tracking-wide;
+    @apply block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 tracking-wide;
+    font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    letter-spacing: 0.04em;
   }
 }
 
 /* Dark theme card with ambient glow - Premium Glass */
 .dark .card {
-  background: rgba(
-    15,
-    23,
-    42,
-    0.65
-  ); /* Deep slate/blue tint, more transparent */
-  backdrop-filter: blur(24px); /* Heavy premium blur */
+  background: radial-gradient(circle at 0% 0%, rgba(77, 208, 225, 0.28), transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(3, 169, 244, 0.25), transparent 55%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.86), rgba(13, 37, 63, 0.9));
+  backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-color: rgba(255, 255, 255, 0.06); /* Ultra-thin subtle border */
-  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.03) inset; /* Inner light ring */
+  border-color: rgba(3, 169, 244, 0.35);
+  box-shadow: 0 18px 40px rgba(1, 22, 39, 0.9),
+    0 0 0 1px rgba(148, 163, 184, 0.2);
   /* NOTE: Do NOT add position: relative here - it breaks absolute positioning in PollCard compact mode */
 }
 
-/* Enhanced ambient glow on hover for dark theme cards - Sophisticated */
 .dark .card:hover {
-  background: rgba(20, 30, 50, 0.75);
-  box-shadow: 0 20px 40px -4px rgba(0, 0, 0, 0.6),
-    0 0 50px -10px rgba(14, 165, 233, 0.1),
-    /* Subtle primary glow */ 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  border-color: rgba(56, 189, 248, 0.2); /* Subtle colored border */
+  background: radial-gradient(circle at 0% 0%, rgba(77, 208, 225, 0.4), transparent 60%),
+    radial-gradient(circle at 100% 0%, rgba(3, 169, 244, 0.35), transparent 60%),
+    linear-gradient(145deg, rgba(13, 37, 63, 0.95), rgba(15, 23, 42, 1));
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.95),
+    0 0 90px rgba(3, 169, 244, 0.3),
+    0 0 0 1px rgba(255, 235, 59, 0.5);
+  border-color: rgba(255, 235, 59, 0.55);
 }
 
-/* Enhanced ambient glow for expanded/active cards in dark theme */
 .dark .card.border-primary-500 {
-  background: rgba(15, 23, 42, 0.85); /* Slightly more opaque for readability */
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7),
-    0 0 60px -10px rgba(14, 165, 233, 0.15),
-    0 0 100px -20px rgba(124, 58, 237, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
-  border-color: rgba(14, 165, 233, 0.3) !important;
+  background: radial-gradient(circle at 10% 0%, rgba(77, 208, 225, 0.45), transparent 60%),
+    linear-gradient(150deg, rgba(3, 105, 161, 0.98), rgba(15, 23, 42, 0.96));
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.98),
+    0 0 120px rgba(3, 169, 244, 0.4),
+    0 0 0 2px rgba(255, 235, 59, 0.8) !important;
+  border-color: rgba(255, 235, 59, 0.8) !important;
 }
 
 /* Smooth scrollbar */
@@ -285,38 +297,53 @@ h6 {
 }
 
 /* Maintain existing overrides for compatibility if strictly needed, but rewritten to be cleaner */
-/* ... keeping the existing specific overrides structure but mapping to new variables might be safer ... */
 /* Re-implementing the necessary light-mode overrides for components that might be hard-coded to slate-700 in code */
 
 html:not(.dark) .bg-slate-700 {
-  background-color: rgb(241 245 249) !important;
+  background-color: rgb(226 239 255) !important;
 }
 html:not(.dark) .bg-slate-700\/50 {
-  background-color: rgb(241 245 249 / 0.7) !important;
+  background-color: rgb(226 239 255 / 0.7) !important;
 }
 html:not(.dark) .bg-slate-800 {
-  background-color: rgb(226 232 240) !important;
+  background-color: rgb(219 234 254) !important;
 }
 html:not(.dark) .bg-slate-800\/50 {
-  background-color: rgb(226 232 240 / 0.7) !important;
+  background-color: rgb(219 234 254 / 0.7) !important;
 }
 html:not(.dark) .bg-slate-600 {
-  background-color: rgb(203 213 225) !important;
+  background-color: rgb(191 219 254) !important;
 }
 html:not(.dark) .border-slate-700 {
-  border-color: rgb(203 213 225) !important;
+  border-color: rgb(191 219 254) !important;
 }
 html:not(.dark) .border-slate-600 {
-  border-color: rgb(226 232 240) !important;
+  border-color: rgb(219 234 254) !important;
 }
 
 /* Text colors for light theme to ensure readability if components use hardcoded slate/white text */
 html:not(.dark) .text-white {
-  color: rgb(15 23 42) !important;
-} /* Slate 900 */
+  color: rgb(13 34 64) !important;
+}
 html:not(.dark) .text-gray-400 {
   color: rgb(100 116 139) !important;
-} /* Slate 500 */
+}
 html:not(.dark) .text-gray-300 {
   color: rgb(71 85 105) !important;
-} /* Slate 600 */
+}
+
+/* Bubble pop on interactive elements for reduced motion aware users */
+@media (prefers-reduced-motion: no-preference) {
+  .btn-primary,
+  .btn-secondary,
+  button {
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out,
+      background-color 0.18s ease-out, border-color 0.18s ease-out;
+  }
+
+  .btn-primary:active,
+  .btn-secondary:active,
+  button:active {
+    transform: translateY(1px) scale(0.98);
+  }
+}

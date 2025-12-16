@@ -160,20 +160,20 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a] relative transition-colors duration-300 overflow-x-hidden max-w-full flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-[#E0F7FA] via-[#B3E5FC] to-[#4FC3F7] dark:from-[#001F3F] dark:via-[#001B35] dark:to-[#000814] relative transition-colors duration-300 overflow-x-hidden max-w-full flex flex-col">
       <TradingBackground />
       {/* Header */}
-      <header className="bg-white/80 dark:bg-[#0B1121]/70 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 sticky top-0 z-50 shadow-sm dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)] transition-colors duration-300">
+      <header className="bg-gradient-to-r from-[#03A9F4]/90 via-[#4FC3F7]/90 to-[#0288D1]/90 dark:from-[#002B5B]/95 dark:via-[#01579B]/95 dark:to-[#001B44]/95 backdrop-blur-xl border-b border-white/40 dark:border-white/10 sticky top-0 z-50 shadow-[0_8px_24px_rgba(1,22,39,0.32)] transition-colors duration-300">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <Logo />
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h1 className="sb-heading text-2xl font-bold">
                   Prediction Oracle
                 </h1>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  Decentralized Predictions on Sonic
+                <p className="text-xs text-sky-900/90 dark:text-sky-100/80 font-medium tracking-wide">
+                  Bikini Bottom of On-chain Predictions
                 </p>
               </div>
             </div>
@@ -187,13 +187,13 @@ function App() {
 
       {/* Navigation */}
       <nav className="container mx-auto px-2 md:px-4 py-4 md:py-6 relative z-10">
-        <div className="flex justify-between sm:justify-start sm:flex-wrap sm:gap-2 bg-white/60 dark:bg-[#0f172a]/60 p-2 rounded-2xl backdrop-blur-2xl border border-gray-200 dark:border-white/5 shadow-sm dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)] transition-colors duration-300">
+        <div className="flex justify-between sm:justify-start sm:flex-wrap sm:gap-2 bg-gradient-to-r from-[#0288D1]/95 via-[#03A9F4]/95 to-[#00BCD4]/95 dark:from-[#001B44]/95 dark:via-[#01579B]/95 dark:to-[#004D61]/95 p-2 rounded-full backdrop-blur-2xl border border-sky-100/70 dark:border-sky-500/40 shadow-[0_10px_25px_rgba(1,22,39,0.35)] transition-colors duration-300">
           <button
             onClick={() => setActiveTab("allPolls")}
-            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm md:text-base transition-all ${
+            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-full font-semibold text-xs md:text-sm tracking-wide transition-all ${
               activeTab === "allPolls"
-                ? "bg-slate-200/90 dark:bg-[rgba(24,36,63,0.85)] text-slate-700 dark:text-white shadow-[0_2px_4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] border border-slate-300 dark:border-white/[0.08]"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
+                ? "bg-accent-400 text-slate-900 shadow-[0_3px_0_rgba(245,127,23,0.9)] border border-yellow-600/70"
+                : "text-sky-50/90 hover:text-yellow-100 hover:bg-white/10 border border-transparent"
             }`}
           >
             <List className="w-5 h-5 sm:w-5 sm:h-5" />
@@ -201,10 +201,10 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab("create")}
-            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm md:text-base transition-all ${
+            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-full font-semibold text-xs md:text-sm tracking-wide transition-all ${
               activeTab === "create"
-                ? "bg-slate-200/90 dark:bg-[rgba(24,36,63,0.85)] text-slate-700 dark:text-white shadow-[0_2px_4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] border border-slate-300 dark:border-white/[0.08]"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
+                ? "bg-accent-400 text-slate-900 shadow-[0_3px_0_rgba(245,127,23,0.9)] border border-yellow-600/70"
+                : "text-sky-50/90 hover:text-yellow-100 hover:bg-white/10 border border-transparent"
             }`}
           >
             <PlusCircle className="w-5 h-5 sm:w-5 sm:h-5" />
@@ -212,10 +212,10 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab("myPolls")}
-            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm md:text-base transition-all ${
+            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-full font-semibold text-xs md:text-sm tracking-wide transition-all ${
               activeTab === "myPolls"
-                ? "bg-slate-200/90 dark:bg-[rgba(24,36,63,0.85)] text-slate-700 dark:text-white shadow-[0_2px_4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] border border-slate-300 dark:border-white/[0.08]"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
+                ? "bg-accent-400 text-slate-900 shadow-[0_3px_0_rgba(245,127,23,0.9)] border border-yellow-600/70"
+                : "text-sky-50/90 hover:text-yellow-100 hover:bg-white/10 border border-transparent"
             }`}
           >
             <LayoutGrid className="w-5 h-5 sm:w-5 sm:h-5" />
@@ -223,10 +223,10 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab("portfolio")}
-            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm md:text-base transition-all ${
+            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-full font-semibold text-xs md:text-sm tracking-wide transition-all ${
               activeTab === "portfolio"
-                ? "bg-slate-200/90 dark:bg-[rgba(24,36,63,0.85)] text-slate-700 dark:text-white shadow-[0_2px_4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] border border-slate-300 dark:border-white/[0.08]"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
+                ? "bg-accent-400 text-slate-900 shadow-[0_3px_0_rgba(245,127,23,0.9)] border border-yellow-600/70"
+                : "text-sky-50/90 hover:text-yellow-100 hover:bg-white/10 border border-transparent"
             }`}
           >
             <Wallet className="w-5 h-5 sm:w-5 sm:h-5" />
@@ -234,10 +234,10 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab("stats")}
-            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm md:text-base transition-all ${
+            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-full font-semibold text-xs md:text-sm tracking-wide transition-all ${
               activeTab === "stats"
-                ? "bg-slate-200/90 dark:bg-[rgba(24,36,63,0.85)] text-slate-700 dark:text-white shadow-[0_2px_4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] border border-slate-300 dark:border-white/[0.08]"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
+                ? "bg-accent-400 text-slate-900 shadow-[0_3px_0_rgba(245,127,23,0.9)] border border-yellow-600/70"
+                : "text-sky-50/90 hover:text-yellow-100 hover:bg-white/10 border border-transparent"
             }`}
           >
             <BarChart3 className="w-5 h-5 sm:w-5 sm:h-5" />
@@ -245,10 +245,10 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab("contact")}
-            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm md:text-base transition-all ${
+            className={`flex items-center justify-center sm:justify-start space-x-0 sm:space-x-2 px-3 sm:px-4 py-2 rounded-full font-semibold text-xs md:text-sm tracking-wide transition-all ${
               activeTab === "contact"
-                ? "bg-slate-200/90 dark:bg-[rgba(24,36,63,0.85)] text-slate-700 dark:text-white shadow-[0_2px_4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] border border-slate-300 dark:border-white/[0.08]"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
+                ? "bg-accent-400 text-slate-900 shadow-[0_3px_0_rgba(245,127,23,0.9)] border border-yellow-600/70"
+                : "text-sky-50/90 hover:text-yellow-100 hover:bg-white/10 border border-transparent"
             }`}
           >
             <Mail className="w-5 h-5 sm:w-5 sm:h-5" />
@@ -265,7 +265,7 @@ function App() {
         activeTab !== "portfolio" &&
         activeTab !== "contact" ? (
           <div className="card text-center">
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
+            <p className="text-gray-700 dark:text-gray-200 text-lg">
               Please connect your wallet to continue
             </p>
           </div>
@@ -300,10 +300,10 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white/60 dark:bg-[#0B1121]/70 backdrop-blur-xl border-t border-gray-200 dark:border-white/5 relative z-10 transition-colors duration-300 mt-auto">
+      <footer className="bg-gradient-to-r from-[#01579B]/90 via-[#0277BD]/90 to-[#004D61]/90 backdrop-blur-xl border-t border-white/40 dark:border-white/10 relative z-10 transition-colors duration-300 mt-auto">
         <div className="container mx-auto px-4 py-6">
-          <p className="text-center text-gray-600 dark:text-gray-400 text-sm">
-            Prediction Oracle - Decentralized Prediction Market
+          <p className="text-center text-sky-50 text-sm font-medium">
+            Prediction Oracle · Underwater On-chain Prediction Markets
           </p>
         </div>
       </footer>
